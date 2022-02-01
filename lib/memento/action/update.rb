@@ -44,13 +44,13 @@ module Memento
 
     def was_destroyed
       new_object do |object|
-        object.errors[:memento_undo] << ActiveSupport::StringInquirer.new("was_destroyed")
+        object.errors.add(:memento_undo, ActiveSupport::StringInquirer.new("was_destroyed"))
         object.id = state.record_id
       end
     end
 
     def was_changed
-      record.errors[:memento_undo] << ActiveSupport::StringInquirer.new("was_changed")
+      record.errors.add(:memento_undo, ActiveSupport::StringInquirer.new("was_changed"))
       record
     end
   end
